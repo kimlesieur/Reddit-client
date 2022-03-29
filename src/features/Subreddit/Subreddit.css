@@ -1,0 +1,31 @@
+
+.subreddit-container {
+    width: 100%;
+    text-align: center;
+    border: none;
+    align-items: center;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+  }
+
+
+.subreddit-container.selected-subreddit {
+    border: 5px solid blue;
+    background: blue;
+    z-index: 1;
+  }
+
+.subreddit-img{
+    width: 50%;
+    border-radius: 50%;
+    text-align: center;
+  }
+
+.subreddit-name {
+  font-weight: 600;
+  margin: 1vw;
+}
+
+
