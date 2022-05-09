@@ -1,11 +1,11 @@
 import './Subreddits.css';
-import Subreddit from '../Subreddit/Subreddit';
+import Subreddit from '../../components/Subreddit/Subreddit';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper";
 
-import React, {useState, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {selectSubredddits, isLoading, isError, loadSubreddits} from './subredditsSlice';

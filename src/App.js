@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import Header from './features/Header/Header';
+import Header from './components/Header/Header';
 import Subreddits from './features/Subreddits/Subreddits';
 import Posts from './features/Posts/Posts';
 

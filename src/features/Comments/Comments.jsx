@@ -1,10 +1,9 @@
 import './Comments.css';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {loadComments} from './commentsSlice';
-import Comment from '../Comment/Comment';
+import Comment from '../../components/Comment/Comment';
 import { toggleShowingComments } from '../Posts/postsSlice';
-import { selectComments, isLoading, error } from './commentsSlice';
+import { selectComments, isLoading, error, loadComments } from './commentsSlice';
 
 
 const Comments = ({numComments, postId, postName, permalink, showingComments, index}) => {
@@ -21,10 +20,9 @@ const Comments = ({numComments, postId, postName, permalink, showingComments, in
     */
 
     const selectCommentsById = (name) => {
-        //console.log(name);
         const commentsList = Object.values(comments).filter(obj => obj.parent_id === name);
-        console.log(`This is the comment lists filtered :`)
-        console.log(commentsList);
+            console.log(`This is the comment lists filtered :`)
+            console.log(commentsList);
         return commentsList;
         
     };

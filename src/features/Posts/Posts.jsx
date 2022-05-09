@@ -1,6 +1,6 @@
 import './Posts.css';
-import Post from '../Post/Post';
-import React, {useState, useEffect} from 'react';
+import Post from '../../components/Post/Post';
+import React, {useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {selectPosts, selectSubreddit, isError, loadPosts, isLoading} from './postsSlice';
 
