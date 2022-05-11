@@ -5,6 +5,9 @@ import Comment from '../../components/Comment/Comment';
 import { toggleShowingComments } from '../Posts/postsSlice';
 import { selectComments, isLoading, error, loadComments } from './commentsSlice';
 
+import Grid from '@mui/material/Grid';
+import { grey } from '@mui/material/colors';
+
 
 const Comments = ({numComments, postId, postName, permalink, showingComments, index}) => {
     const dispatch = useDispatch();
@@ -19,7 +22,7 @@ const Comments = ({numComments, postId, postName, permalink, showingComments, in
     }
     */
 
-    const selectCommentsById = (name) => {
+    const filterCommentsById = (name) => {
         const commentsList = Object.values(comments).filter(obj => obj.parent_id === name);
             console.log(`This is the comment lists filtered :`)
             console.log(commentsList);
@@ -29,22 +32,22 @@ const Comments = ({numComments, postId, postName, permalink, showingComments, in
 
 
     return (
-        <div className='comments-container'>
-            <span className="num-comments">{numComments}</span>
+        <Grid container sx={{backgroundColor: '#0788bf'}}>
+            {/*
             <button
                 type="button"
                 aria-label="Show comments"
                 onClick={() => {
                     dispatch(loadComments({permalink: permalink, postId: postId}));
-                    dispatch(toggleShowingComments(index));
                 }}
                 >
                 Comments
             </button>
+            */}
             <span className="post-comments-container">
                 {showingComments && 
                 <div>
-                    {Object.values(selectCommentsById(postName)).map((comment, index) => {
+                    {Object.values(filterCommentsById(postName)).map((comment, index) => {
                         return <Comment 
                                     key={index}
                                     comments={comment} 
@@ -54,7 +57,7 @@ const Comments = ({numComments, postId, postName, permalink, showingComments, in
                 </div>
                 }
             </span>
-        </div>
+        </Grid>
 
     );
 };
