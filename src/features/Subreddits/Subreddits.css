@@ -1,14 +1,15 @@
 .swiper-wrapper {
-    padding: 50px;
+    padding: 0px;
     height: 5vh;
 }
 
 .swiper-button-prev{
     padding-right: 30px;
-    padding-left: 30px;
+    padding-left: 0px;
 }
 
 .swiper-button-next{
-    padding-right: 30px;
+    padding-right: 0px;
     padding-left: 30px;
 }
+

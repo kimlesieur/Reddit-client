@@ -30,10 +30,9 @@ const Subreddits = () => {
 
 
     return (
-        <Container sx={{ py: 8 }} maxWidth="md">
+        <Container sx={{ py: 2, mx: 'auto' }} maxWidth="md">
             <Swiper 
                 slidesPerView={4}
-                spaceBetween={10}
                 navigation={true} 
                 modules={[Navigation]} 
                 className="mySwiper"

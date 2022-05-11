@@ -7,7 +7,6 @@ import { loadComments } from '../../features/Comments/commentsSlice';
 
 import moment from 'moment';
 import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -51,49 +50,59 @@ const Post = ({post, index}) => {
     };
 
 return (
-    <Grid item key={post.id} xs={12}>
-        <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }} >
-                {checkIfPicture(post.is_gallery, post.media) && 
-                <CardMedia
-                component="img"
-                sx={{
-                    pt: '10%',
-                    px: '10%',
-                }}
-                image={post.url}
-                alt="random"
-                />
-                }
-                <CardContent sx={{ flexGrow: 1 }}>
-                    <Typography>
-                    {post.title}
-                    </Typography>
-                </CardContent>
-                <CardContent sx={{ flexGrow: 1 }}>
-                    <Typography>
-                    Posted by : {post.author}
-                    </Typography>
-                    <Typography>
-                    {moment.unix(post.created_utc).fromNow()}
-                    </Typography>
-                </CardContent>
-                <CardActions>
-                    <Button size="large" onClick={() => toggleComments(index, post.permalink, post.id)}>
-                        <CommentIcon/>
-                        {post.num_comments}
+        <>
+        <Grid item key={post.id} xs={2} >
+                <CardActions sx={{display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%'}}>
+                    <Button size="large" sx={{my: 4, display: 'block'}} onClick={() => favoritePost()}>
+                        {favorite ?
+                            <FavoriteIcon sx={{ color: pink[500], fontSize: 30  }} />
+                            :
+                            <FavoriteBorderIcon sx={{ color: pink[500], fontSize: 30 }} />
+                        }
+                        <Typography sx={{ color: pink[500], fontSize: 25  }}>
+                            {numFavs()}
+                        </Typography>
                     </Button>
-                    <Button size="large"  onClick={() => favoritePost()}>
-                    {favorite ?
-                        <FavoriteIcon sx={{ color: pink[500]  }} />
-                        :
-                        <FavoriteBorderIcon sx={{ color: pink[500] }} />
-                    }
-                        {numFavs()}
+                    <Button size="large" sx={{my: 4, display: 'block'}} onClick={() => toggleComments(index, post.permalink, post.id)}>
+                        <CommentIcon sx={{ color: "primary", fontSize: 30 }}/>
+                        <Typography sx={{ color: "primary", fontSize: 25  }}>
+                            {post.num_comments}
+                        </Typography>
+                        
                     </Button>
+                    
                 </CardActions>
-                <Comments numComments={post.num_comments} postId={post.id} postName={post.name} permalink={post.permalink} showingComments={post.showingComments} index={index} />
-        </Card>
-    </Grid>
+        </Grid>
+        <Grid item key={post.id} xs={10}>
+        
+                    {checkIfPicture(post.is_gallery, post.media) && 
+                    <CardMedia
+                    component="img"
+                    sx={{
+                        pt: '10%',
+                        px: '10%',
+                    }}
+                    image={post.url}
+                    alt="random"
+                    />
+                    }
+                    <CardContent sx={{ flexGrow: 1, borderBottom:'1px solid black', mx:1 }}>
+                        <Typography>
+                        {post.title}
+                        </Typography>
+                    </CardContent>
+                    <CardContent sx={{ flexGrow: 1, display: 'flex', justifyContent:'space-between', px:2 }}>
+                        <Typography sx={{paddingLeft: 2}}>
+                        Posted by : {post.author}
+                        </Typography>
+                        <Typography>
+                        {moment.unix(post.created_utc).fromNow()}
+                        </Typography>
+                    </CardContent>
+                   
+            
+        </Grid>
+        </>
     );
 };
 

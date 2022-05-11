@@ -21,10 +21,11 @@ return (
                         src={subreddit.icon_img || './postAvatar.jpg' }
                         alt={subreddit.display_name}
                         className="subreddit-img"
-                        style={{border: `3px solid ${subreddit.primary_color}`}}
                     
                     />
-                    <div className="subreddit-name">
+                    <div className={`subreddit-name
+                    ${actualSubreddit === subreddit.display_name_prefixed && `selected-subreddit`}
+                    `}>
                         {subreddit.display_name} 
                     </div>
             </div>
