@@ -2,7 +2,7 @@ import './Subreddit.css';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import React, {useState, useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setSubreddit, selectSubreddit } from '../Posts/postsSlice';
+import { setSubreddit, selectSubreddit } from '../../features/Posts/postsSlice';
 
 
 const Subreddit = ({subreddit}) => {
@@ -18,7 +18,7 @@ return (
             >
              <div className="subreddit-card">
                     <img
-                        src={subreddit.icon_img || './postAvatar.png' }
+                        src={subreddit.icon_img || './postAvatar.jpg' }
                         alt={subreddit.display_name}
                         className="subreddit-img"
                         style={{border: `3px solid ${subreddit.primary_color}`}}

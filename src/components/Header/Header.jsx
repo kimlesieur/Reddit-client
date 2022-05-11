@@ -3,12 +3,12 @@ import React, {useState, useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 const Header = () => {
-
+    
 
 return (
     <header>
-        <p><h1>Reddit minimal app</h1></p>
         <img src='./icon.png' alt='Reddit curator app' style={{height:"10vh", padding: "1vw 2vw"}} />
+        <h1 className='titre-logo'>Reddit minimal app</h1>
         <form className='search' onSubmit={undefined}  >
             <input
             type='text'

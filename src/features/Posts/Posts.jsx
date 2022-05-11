@@ -3,6 +3,9 @@ import Post from '../../components/Post/Post';
 import React, {useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {selectPosts, selectSubreddit, isError, loadPosts, isLoading} from './postsSlice';
+import Grid from '@mui/material/Grid';
+import Container from '@mui/material/Container';
+
 
 const Posts = () => {
     const dispatch = useDispatch();
@@ -21,8 +24,8 @@ const Posts = () => {
       }
 
 return ( 
-    <div>
-        <div className="post-wrapper">
+    <Container sx={{ py: 8 }} maxWidth="md">
+        <Grid container spacing={4}>
             {Object.values(posts).map((post, index) => {
                 return <Post
                     key={post.id}
@@ -30,9 +33,10 @@ return (
                     index={index}
                 />
             })}
-        </div>
-    </div>
+        </Grid>
+    </Container>
     );
 };
 
 export default Posts;
+

@@ -87,13 +87,7 @@ export const postsSlice = createSlice({
 });
 
 
-export const {
-    setSubreddit,
-    toggleShowingComments
-} = postsSlice.actions;
-
-
-
+export const {setSubreddit, toggleShowingComments} = postsSlice.actions;
 
 export const selectPosts = (state) => state.posts.postsList;
 export const selectSubreddit = (state) => state.posts.selectedSubredddit;
