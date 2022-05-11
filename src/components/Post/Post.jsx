@@ -2,6 +2,9 @@ import './Post.css';
 import React, {useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Comments from '../../features/Comments/Comments';
+import { toggleShowingComments } from '../../features/Posts/postsSlice';
+import { loadComments } from '../../features/Comments/commentsSlice';
+
 import moment from 'moment';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
@@ -16,6 +19,7 @@ import pink from '@mui/material/colors/pink';
 import CommentIcon from '@mui/icons-material/Comment';
 
 const Post = ({post, index}) => {
+    const dispatch = useDispatch() ;
     const [favorite, setFavorite] = useState(false);
     const [showComments, setShowComments] = useState(false);
 
@@ -41,12 +45,13 @@ const Post = ({post, index}) => {
         return post.ups;
     };
 
-    const toggleComments = () => {
-       return showComments ? setShowComments(false) : setShowComments(true);
-    }
+    const toggleComments = (index, link, id) => {
+        dispatch(loadComments({permalink: link, postId: id}));
+        dispatch(toggleShowingComments(index));
+    };
 
 return (
-    <Grid item key={post.id} xs={12} sm={6} md={4}>
+    <Grid item key={post.id} xs={12}>
         <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }} >
                 {checkIfPicture(post.is_gallery, post.media) && 
                 <CardMedia
@@ -73,9 +78,9 @@ return (
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    <Button size="large"  onClick={() => toggleComments()}>
+                    <Button size="large" onClick={() => toggleComments(index, post.permalink, post.id)}>
                         <CommentIcon/>
-                        <Comments numComments={post.num_comments} postId={post.id} postName={post.name} permalink={post.permalink} showingComments={post.showingComments} index={index} />
+                        {post.num_comments}
                     </Button>
                     <Button size="large"  onClick={() => favoritePost()}>
                     {favorite ?
@@ -86,12 +91,7 @@ return (
                         {numFavs()}
                     </Button>
                 </CardActions>
-                
-            <div className="comments-container">
-                <div className="post-comments">
-                    
-                </div>
-            </div>
+                <Comments numComments={post.num_comments} postId={post.id} postName={post.name} permalink={post.permalink} showingComments={post.showingComments} index={index} />
         </Card>
     </Grid>
     );

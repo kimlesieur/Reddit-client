@@ -1,5 +1,9 @@
 import React from 'react';
 import './Comment.css';
+import { Typography, Card, Grid } from '@mui/material';
+
+
+
 
 const Comment = ({comments}) => {
 
@@ -8,12 +12,12 @@ const Comment = ({comments}) => {
   }
 
   return (
-    <div className="comment">
-     {comments.author} : {comments.body}
-     <br/>
-
-
-    </div>
+    <Grid item sx={{m: 2, backgroundColor: '#0788bf'}}>
+      <Card sx={{backgroundColor: '#0788bf'}}>
+      <Typography color="white">{comments.author} : {comments.body}</Typography> 
+      </Card>
+      
+    </Grid>
   );
 };
 

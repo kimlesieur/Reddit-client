@@ -25,7 +25,7 @@ const Posts = () => {
 
 return ( 
     <Container sx={{ py: 8 }} maxWidth="md">
-        <Grid container spacing={4}>
+        <Grid container spacing={2}>
             {Object.values(posts).map((post, index) => {
                 return <Post
                     key={post.id}

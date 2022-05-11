@@ -9,6 +9,7 @@ import React, {useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {selectSubredddits, isLoading, isError, loadSubreddits} from './subredditsSlice';
+import Container from '@mui/material/Container';
 
 
 
@@ -29,21 +30,23 @@ const Subreddits = () => {
 
 
     return (
-        <Swiper 
-            slidesPerView={4}
-            spaceBetween={10}
-            navigation={true} 
-            modules={[Navigation]} 
-            className="mySwiper"
-        >
-            
-            {subreddits.map((subreddit, index) => {
-                  return <SwiperSlide key={subreddit.id}>
-                            <Subreddit subreddit={subreddit} /> 
-                        </SwiperSlide>
-                    }
-                )}
-        </Swiper>
+        <Container sx={{ py: 8 }} maxWidth="md">
+            <Swiper 
+                slidesPerView={4}
+                spaceBetween={10}
+                navigation={true} 
+                modules={[Navigation]} 
+                className="mySwiper"
+            >
+                
+                {subreddits.map((subreddit, index) => {
+                    return <SwiperSlide key={subreddit.id}>
+                                <Subreddit subreddit={subreddit} /> 
+                            </SwiperSlide>
+                        }
+                    )}
+            </Swiper>
+        </Container>
     );
 };
 

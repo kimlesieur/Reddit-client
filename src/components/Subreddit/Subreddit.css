@@ -12,8 +12,8 @@
 
 
 .subreddit-container.selected-subreddit {
-    border: 5px solid blue;
-    background: blue;
+    border: 5px solid #0788BF;
+    background: #0788BF;
     z-index: 1;
   }
 
