@@ -1,7 +1,6 @@
 import './Post.css';
 import React, {useState} from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import Comments from '../../features/Comments/Comments';
+import { useDispatch } from 'react-redux';
 import { toggleShowingComments } from '../../features/Posts/postsSlice';
 import { loadComments } from '../../features/Comments/commentsSlice';
 
@@ -16,11 +15,20 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import pink from '@mui/material/colors/pink';
 import CommentIcon from '@mui/icons-material/Comment';
+import { makeStyles } from '@mui/styles';
+
+const useStyles = makeStyles({
+    customHover: {
+          '&:hover': {
+              backgroundColor: pink[50],
+              }
+    }
+  });
 
 const Post = ({post, index}) => {
     const dispatch = useDispatch() ;
     const [favorite, setFavorite] = useState(false);
-    const [showComments, setShowComments] = useState(false);
+    const classes = useStyles();
 
     const checkIfPicture = (is_gallery, is_media) => {
         if(post.is_gallery || post.media){
@@ -53,7 +61,7 @@ return (
         <>
         <Grid item key={post.id} xs={2} >
                 <CardActions sx={{display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%'}}>
-                    <Button size="large" sx={{my: 4, display: 'block'}} onClick={() => favoritePost()}>
+                    <Button size="large" sx={{my: 4, display: 'block'}} className={classes.customHover} onClick={() => favoritePost()}>
                         {favorite ?
                             <FavoriteIcon sx={{ color: pink[500], fontSize: 30  }} />
                             :
@@ -99,8 +107,6 @@ return (
                         {moment.unix(post.created_utc).fromNow()}
                         </Typography>
                     </CardContent>
-                   
-            
         </Grid>
         </>
     );

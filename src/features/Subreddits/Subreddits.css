@@ -3,13 +3,13 @@
     height: 5vh;
 }
 
-.swiper-button-prev{
-    padding-right: 30px;
-    padding-left: 0px;
+.swiper-button-prev {
+    padding-right: 1vw;
 }
 
-.swiper-button-next{
-    padding-right: 0px;
-    padding-left: 30px;
+.swiper-button-next {
+    padding-right: 1vw;
+    padding-left: 1vw;
 }
+
 

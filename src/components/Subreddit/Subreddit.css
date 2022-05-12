@@ -1,8 +1,8 @@
 
 .subreddit-container {
-    width: 100%;
+    width: 80%;
+    padding: 1vh 0vw;
     text-align: center;
-    border: none;
     align-items: center;
     margin: auto;
     display: flex;
@@ -10,9 +10,12 @@
     cursor: pointer;
   }
 
+  .subreddit-container:hover {
+    background: #0788BF;
+  }
+
 
 .subreddit-container.selected-subreddit {
-    border: 5px solid #0788BF;
     background: #0788BF;
     z-index: 1;
   }

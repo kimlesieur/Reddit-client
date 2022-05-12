@@ -12,12 +12,10 @@ const Comment = ({comments}) => {
   }
 
   return (
-    <Grid item sx={{m: 2, backgroundColor: '#0788bf'}}>
-      <Card sx={{backgroundColor: '#0788bf'}}>
-      <Typography color="white">{comments.author} : {comments.body}</Typography> 
+      <Card sx={{backgroundColor: '#0777ab', m:2}}>
+        <Typography color="white" sx={{textDecoration: 'underline', p: 1}}>{comments.author} :</Typography> 
+        <Typography color="white" sx={{p: 1}}>{comments.body}</Typography> 
       </Card>
-      
-    </Grid>
   );
 };
 

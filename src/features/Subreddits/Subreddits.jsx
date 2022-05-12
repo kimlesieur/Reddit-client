@@ -1,6 +1,7 @@
 import './Subreddits.css';
 import Subreddit from '../../components/Subreddit/Subreddit';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { Scrollbar } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper";
@@ -30,14 +31,12 @@ const Subreddits = () => {
 
 
     return (
-        <Container sx={{ py: 2, mx: 'auto' }} maxWidth="md">
+        <Container sx={{ py: 7, mx: 'auto' }} maxWidth="md">
             <Swiper 
-                slidesPerView={4}
-                navigation={true} 
-                modules={[Navigation]} 
+                slidesPerView={3}
+                modules={[Scrollbar]}
                 className="mySwiper"
             >
-                
                 {subreddits.map((subreddit, index) => {
                     return <SwiperSlide key={subreddit.id}>
                                 <Subreddit subreddit={subreddit} /> 

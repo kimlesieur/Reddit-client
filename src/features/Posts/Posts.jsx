@@ -27,7 +27,7 @@ const Posts = () => {
       }
 
 return ( 
-    <Container sx={{ py: 2 }} maxWidth="md">
+    <Container maxWidth="md">
         
             {Object.values(posts).map((post, index) => {
                 return <Card sx={{ height: '100%', m:2 }} >
