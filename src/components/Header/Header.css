@@ -2,5 +2,55 @@
 header {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+    padding: 2vh 2.5vw;
+    background-color: #00578a;
 };
+
+.logo-container {
+    display: inherit;
+}
+
+.img-container > img {
+    height:5vh;
+    padding: 1vw 2vw
+}
+
+.title-container {
+    max-width: 20vw;
+}
+
+.title-logo {
+    color: white;
+}
+
+/* Bigger screen */ 
+
+@media screen and (min-width: 500px){ 
+
+    .title-container {
+        max-width: 30vw;
+    }
+
+    .img-container > img {
+        height:7vh;
+        padding: 1vw 2vw
+    }
+
+  }
+
+  @media screen and (min-width: 800px){ 
+
+    .title-container {
+        max-width: 50vw;
+        padding: 1%;
+        border: 1px solid rgba(255, 255, 255, 0.8);
+        border-radius: 5px;
+    }
+
+    .img-container > img {
+        height:10vh;
+        padding: 1vw 2vw
+    }
+
+  }

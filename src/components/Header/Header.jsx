@@ -7,8 +7,12 @@ const Header = () => {
 
 return (
     <header>
-        <img src='./icon.png' alt='Reddit curator app' style={{height:"10vh", padding: "1vw 2vw"}} />
-        <h1 className='titre-logo'>Reddit minimal app</h1>
+        <div className='img-container'>
+                <img src='./icon.png' alt='Reddit curator app' />
+            </div>
+        <div className='title-container'>
+            <h1 className='title-logo'>Reddit minimal app</h1>
+        </div>
         <form className='search' onSubmit={undefined}  >
             <input
             type='text'
@@ -17,9 +21,6 @@ return (
             onChange={undefined}
             aria-label="Search in Reddit posts"
             />
-            <button type="submit" onClick={undefined} aria-label="search">
-                Search in Reddit
-            </button>
         </form>
     </header>
     );

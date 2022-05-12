@@ -6,6 +6,7 @@ import { toggleShowingComments } from '../Posts/postsSlice';
 import { selectComments, isLoading, error, loadComments } from './commentsSlice';
 
 import Grid from '@mui/material/Grid';
+import Stack from '@mui/material/Stack';
 import { grey } from '@mui/material/colors';
 
 
@@ -32,18 +33,7 @@ const Comments = ({numComments, postId, postName, permalink, showingComments, in
 
 
     return (
-        <Grid container sx={{backgroundColor: '#0788bf'}}>
-            {/*
-            <button
-                type="button"
-                aria-label="Show comments"
-                onClick={() => {
-                    dispatch(loadComments({permalink: permalink, postId: postId}));
-                }}
-                >
-                Comments
-            </button>
-            */}
+        <Stack container sx={{backgroundColor: '#0788bf', maxHeight: 500, overflow: 'auto'}}>
             <span className="post-comments-container">
                 {showingComments && 
                 <div>
@@ -57,7 +47,7 @@ const Comments = ({numComments, postId, postName, permalink, showingComments, in
                 </div>
                 }
             </span>
-        </Grid>
+        </Stack>
 
     );
 };
