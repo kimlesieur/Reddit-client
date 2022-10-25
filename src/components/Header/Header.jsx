@@ -3,8 +3,13 @@ import React, {useState, useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 const Header = () => {
-    
 
+    const [search, setSearch] = useState('');
+
+    const handleChange = (e) => {
+        setSearch(e.target.value);
+    }
+    
 return (
     <header>
         <div className='img-container'>
@@ -17,8 +22,8 @@ return (
             <input
             type='text'
             placeholder='search...'
-            value=''
-            onChange={undefined}
+            value={search}
+            onChange={handleChange}
             aria-label="Search in Reddit posts"
             />
         </form>
