@@ -4,7 +4,7 @@ import Comments from '../../features/Comments/Comments';
 
 import React, {useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {selectPosts, selectSubreddit, isError, loadPosts, isLoading} from './postsSlice';
+import {selectPosts, selectSubreddit, loadPosts, isLoading} from './postsSlice';
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 import Card from '@mui/material/Card';
@@ -15,7 +15,6 @@ const Posts = () => {
     const posts = useSelector(selectPosts);
     const selectedSubreddit = useSelector(selectSubreddit);
     const loading = useSelector(isLoading);
-    const error = useSelector(isError);
 
     useEffect(()=>{
         dispatch(loadPosts(selectedSubreddit));

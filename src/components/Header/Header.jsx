@@ -2,7 +2,6 @@ import './Header.css';
 import React, {useState} from 'react';
 import { useDispatch } from 'react-redux';
 import { handleChangeValue } from '../../features/Posts/postsSlice';
-import { debounceInput } from '../../utils/utils';
 
 const Header = () => {
 

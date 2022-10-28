@@ -1,6 +1,6 @@
 import React from 'react';
 import './Comment.css';
-import { Typography, Card, Grid } from '@mui/material';
+import { Typography, Card } from '@mui/material';
 
 const Comment = ({comments}) => {
 

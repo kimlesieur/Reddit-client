@@ -1,33 +1,23 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
-import { arrayFilter } from '../../utils/utils.js';
+import { arrayFilter } from '../../utils/utils';
 
-export const loadPosts = createAsyncThunk(
+type AsyncThunkConfig = {
+    state: RootState,
+    rejectValue: string | unknown,
+};
+
+export const loadPosts = createAsyncThunk<Post, void, AsyncThunkConfig>(
     'posts/loadPosts',
     async (subreddit) => {
         const res = await fetch(`https://www.reddit.com/${subreddit}.json`);
         const data = await res.json();
-        return data.data.children.map(post => 
+        return data.data.children.map((post: Post) => 
             ({...post.data, showingComments: false})
         );
     }
 );
 
-/* Old version when comments were in the same slice
-export const fetchComments = createAsyncThunk(
-    'posts/fetchComments',
-    async (index, permalink, {getState}) => {
-        const postsList = getState().postsList;
-        postsList[index].showingComments = !postsList[index].showingComments;
-        if(!postsList[index].showingComments){return}
-        const res = await fetch(`https://www.reddit.com${permalink}.json`);
-        const data = res.json();
-        return data[1].data.children.map(comment => comment.data);
-    }
-)
-*/
-
-//Add a debounce to limit calling
-export const handleChangeValue = (value) => {
+export const handleChangeValue = (value: string) => {
     return (dispatch, getState) => {
         const state = getState();
         dispatch(setSearchTerm(value));
@@ -39,8 +29,6 @@ export const handleChangeValue = (value) => {
         }
     } 
 };
-
-
 
 export const postsSlice = createSlice({
     name: 'posts',
@@ -77,14 +65,6 @@ export const postsSlice = createSlice({
                 state.isLoading = false;
                 state.error = false;
                 state.postsList = action.payload;
-                //state.postsList = action.payload.map(post => ({[post.id]: post}));
-                /*
-                action.payload.map(post => {
-                    const id = post.id;
-                    state.postsList[id] = {...post}
-                });
-                */
-
             })
             .addCase(loadPosts.rejected, (state) => {
                 state.isLoading = false;
@@ -96,7 +76,6 @@ export const postsSlice = createSlice({
 
 
 export const {setSubreddit, toggleShowingComments, setSearchTerm, setPostsList} = postsSlice.actions;
-
 export const selectPosts = (state) => state.posts.postsList;
 export const selectSubreddit = (state) => state.posts.selectedSubreddit;
 export const isLoading = state => state.posts.isLoading;

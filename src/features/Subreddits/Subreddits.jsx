@@ -4,12 +4,11 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Scrollbar } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
-import { Navigation } from "swiper";
 
 import React, {useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import {selectSubredddits, isLoading, isError, loadSubreddits} from './subredditsSlice';
+import {selectSubredddits, isLoading, loadSubreddits} from './subredditsSlice';
 import Container from '@mui/material/Container';
 
 
@@ -18,7 +17,6 @@ const Subreddits = () => {
     const dispatch= useDispatch();
     const subreddits = useSelector(selectSubredddits);
     const loading = useSelector(isLoading);
-    const error = useSelector(isError);
 
     useEffect(() => {
         dispatch(loadSubreddits())},

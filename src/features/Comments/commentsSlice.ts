@@ -1,17 +1,13 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 
-
-
 export const loadComments = createAsyncThunk(
     'comments/loadComments',
-    async ({permalink, postId}, thunkAPI) => {
+    async ({permalink}, thunkAPI) => {
         const res = await fetch(`https://www.reddit.com${permalink}.json`);
         const data = await res.json();
-        const id = postId;
         return data[1].data.children.map(comment => comment.data);
     }
 );
-
 
 export const commentsSlice = createSlice({
     name: 'comments',
