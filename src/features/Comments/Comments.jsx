@@ -33,7 +33,7 @@ const Comments = ({numComments, postId, postName, permalink, showingComments, in
 
 
     return (
-        <Stack container sx={{backgroundColor: '#0788bf', maxHeight: 500, overflow: 'auto'}}>
+        <Stack container="true" sx={{backgroundColor: '#0788bf', maxHeight: 500, overflow: 'auto'}}>
             <span className="post-comments-container">
                 {showingComments && 
                 <div>

@@ -59,7 +59,7 @@ const Post = ({post, index}) => {
 
 return (
         <>
-        <Grid item key={post.id} xs={2} >
+        <Grid item key={post.id+1} xs={2} >
                 <CardActions sx={{display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%'}}>
                     <Button size="large" sx={{my: 4, display: 'block'}} className={classes.customHover} onClick={() => favoritePost()}>
                         {favorite ?
@@ -81,7 +81,7 @@ return (
                     
                 </CardActions>
         </Grid>
-        <Grid item key={post.id} xs={10}>
+        <Grid item key={post.id+2} xs={10}>
         
                     {checkIfPicture(post.is_gallery, post.media) && 
                     <CardMedia

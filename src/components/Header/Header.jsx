@@ -1,14 +1,39 @@
 import './Header.css';
-import React, {useState, useEffect} from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, {useState} from 'react';
+import { useDispatch } from 'react-redux';
+import { handleChangeValue } from '../../features/Posts/postsSlice';
+import { debounceInput } from '../../utils/utils';
 
 const Header = () => {
 
     const [search, setSearch] = useState('');
+    const dispatch = useDispatch();
 
-    const handleChange = (e) => {
-        setSearch(e.target.value);
-    }
+    const handleChange = (value) => {
+        dispatch(handleChangeValue(value));
+    };
+
+    let timer;
+    const handleChangeDebounce = (value) => {
+        setSearch(value);
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+            handleChange(value);
+        }, 500);
+    };
+
+
+    // function debounce(func, timeout = 300){
+    //     let timer;
+    //     return (...args) => {
+    //       clearTimeout(timer);
+    //       timer = setTimeout(() => { func.apply(this, args); }, timeout);
+    //     };
+    //   }
+    //   function saveInput(){
+    //     console.log('Saving data');
+    //   }
+    //   const processChange = debounce(() => saveInput());
     
 return (
     <header>
@@ -23,7 +48,7 @@ return (
             type='text'
             placeholder='search...'
             value={search}
-            onChange={handleChange}
+            onChange={(e) => handleChangeDebounce(e.target.value)}
             aria-label="Search in Reddit posts"
             />
         </form>

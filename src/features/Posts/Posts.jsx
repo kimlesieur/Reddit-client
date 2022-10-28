@@ -17,10 +17,9 @@ const Posts = () => {
     const loading = useSelector(isLoading);
     const error = useSelector(isError);
 
-
     useEffect(()=>{
         dispatch(loadPosts(selectedSubreddit));
-    },[selectedSubreddit] );
+    },[selectedSubreddit, dispatch] );
 
     if (loading) {
         return <div>loading state</div>;
@@ -30,17 +29,18 @@ return (
     <Container maxWidth="md">
         
             {Object.values(posts).map((post, index) => {
-                return <Card sx={{ height: '100%', m:2 }} >
-                    <Grid container sx={{}}>
-                        <Post
-                        key={post.id}
-                        post={post}
-                        index={index}
-                        />
-                        <Comments numComments={post.num_comments} postId={post.id} postName={post.name} permalink={post.permalink} showingComments={post.showingComments} index={index} />
-                    </Grid>
-                </Card>
-                    
+                return (
+                    <Card sx={{ height: '100%', m:2 }} key={index} >
+                        <Grid container sx={{}}>
+                            <Post
+                            key={index}
+                            post={post}
+                            index={index}
+                            />
+                            <Comments numComments={post.num_comments} postId={post.id} postName={post.name} permalink={post.permalink} showingComments={post.showingComments} index={index} />
+                        </Grid>
+                    </Card>
+                )
             })}
             
     </Container>
