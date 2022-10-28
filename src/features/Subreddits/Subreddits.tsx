@@ -6,7 +6,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 
 import React, {useEffect} from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
 
 import {selectSubredddits, isLoading, loadSubreddits} from './subredditsSlice';
 import Container from '@mui/material/Container';
@@ -14,9 +14,9 @@ import Container from '@mui/material/Container';
 
 
 const Subreddits = () => {
-    const dispatch= useDispatch();
-    const subreddits = useSelector(selectSubredddits);
-    const loading = useSelector(isLoading);
+    const dispatch= useAppDispatch();
+    const subreddits = useAppSelector(selectSubredddits);
+    const loading = useAppSelector(isLoading);
 
     useEffect(() => {
         dispatch(loadSubreddits())},
@@ -35,8 +35,8 @@ const Subreddits = () => {
                 modules={[Scrollbar]}
                 className="mySwiper"
             >
-                {subreddits.map((subreddit, index) => {
-                    return <SwiperSlide key={subreddit.id}>
+                {subreddits.map((subreddit: Subreddit, index: number) => {
+                    return <SwiperSlide key={index}>
                                 <Subreddit subreddit={subreddit} /> 
                             </SwiperSlide>
                         }

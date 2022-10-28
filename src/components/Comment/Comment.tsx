@@ -1,8 +1,7 @@
 import React from 'react';
-import './Comment.css';
 import { Typography, Card } from '@mui/material';
 
-const Comment = ({comments}) => {
+const Comment = ({comments}: {comments: Comment}) => {
 
   if(comments.removal_reason){
     return null;

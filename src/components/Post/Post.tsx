@@ -1,6 +1,5 @@
-import './Post.css';
 import React, {useState} from 'react';
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from '../../app/hooks';
 import { toggleShowingComments } from '../../features/Posts/postsSlice';
 import { loadComments } from '../../features/Comments/commentsSlice';
 
@@ -25,12 +24,12 @@ const useStyles = makeStyles({
     }
   });
 
-const Post = ({post, index}) => {
-    const dispatch = useDispatch() ;
+const Post = ({post, index}: {post: Post, index: number}) => {
+    const dispatch = useAppDispatch() ;
     const [favorite, setFavorite] = useState(false);
     const classes = useStyles();
 
-    const checkIfPicture = (is_gallery, is_media) => {
+    const checkIfPicture = (is_gallery: string, is_media: string) => {
         if(post.is_gallery || post.media){
             return false;
         }
@@ -52,7 +51,7 @@ const Post = ({post, index}) => {
         return post.ups;
     };
 
-    const toggleComments = (index, link, id) => {
+    const toggleComments = (index: number, link: string, id: number) => {
         dispatch(loadComments({permalink: link, postId: id}));
         dispatch(toggleShowingComments(index));
     };

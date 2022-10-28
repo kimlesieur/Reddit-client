@@ -1,38 +1,25 @@
 import './Header.css';
 import React, {useState} from 'react';
-import { useDispatch } from 'react-redux';
-import { handleChangeValue } from '../../features/Posts/postsSlice';
+import { useAppDispatch } from '../../app/hooks';
+import { handleSearch } from '../../features/Posts/postsSlice';
 
 const Header = () => {
 
     const [search, setSearch] = useState('');
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
-    const handleChange = (value) => {
-        dispatch(handleChangeValue(value));
+    const handleChange = (value: string) => {
+        dispatch(handleSearch(value));
     };
 
-    let timer;
-    const handleChangeDebounce = (value) => {
+    let timer:NodeJS.Timeout;
+    const handleChangeDebounce = (value: string) => {
         setSearch(value);
         clearTimeout(timer);
         timer = setTimeout(() => {
             handleChange(value);
         }, 500);
     };
-
-
-    // function debounce(func, timeout = 300){
-    //     let timer;
-    //     return (...args) => {
-    //       clearTimeout(timer);
-    //       timer = setTimeout(() => { func.apply(this, args); }, timeout);
-    //     };
-    //   }
-    //   function saveInput(){
-    //     console.log('Saving data');
-    //   }
-    //   const processChange = debounce(() => saveInput());
     
 return (
     <header>
@@ -47,7 +34,7 @@ return (
             type='text'
             placeholder='search...'
             value={search}
-            onChange={(e) => handleChangeDebounce(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChangeDebounce(e.target.value)}
             aria-label="Search in Reddit posts"
             />
         </form>

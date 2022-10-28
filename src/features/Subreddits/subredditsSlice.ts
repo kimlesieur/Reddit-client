@@ -1,24 +1,30 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
+import { RootState } from '../../app/store';
 
-export const loadSubreddits = createAsyncThunk(
+type AsyncThunkConfig = {
+    state: RootState,
+    rejectValue: string | unknown,
+};
+
+export const loadSubreddits = createAsyncThunk<Subreddit[], void, AsyncThunkConfig>(
     'subreddits/loadSubreddits',
     async () => {
         const res = await fetch(`https://www.reddit.com/subreddits.json?limit=10`);
         const data = await res.json();
-        return data.data.children.map(subreddit => subreddit.data);
+        return data.data.children.map((subreddit: Subreddit) => subreddit.data);
     }
 );
 
+const initialState: SubredditState = {
+    subredditsList: [],
+    error: false,
+    isLoading: false, 
+}
+
 export const subredditSlice = createSlice({
     name:'subreddits',
-    initialState:{
-        subredditsList: [],
-        error: false,
-        isLoading: false, 
-    },
-    reducers: {
-
-    }, 
+    initialState,
+    reducers: {}, 
     extraReducers: (builder) => {
         builder
             .addCase(loadSubreddits.pending, (state) => {
@@ -38,8 +44,8 @@ export const subredditSlice = createSlice({
     }
 });
 
-export const selectSubredddits = state => state.subreddits.subredditsList;
-export const isLoading = state => state.posts.isLoading;
-export const isError = state => state.posts.error;
+export const selectSubredddits = (state: RootState) => state.subreddits.subredditsList;
+export const isLoading = (state: RootState) => state.posts.isLoading;
+export const isError = (state: RootState) => state.posts.error;
 
 export default subredditSlice.reducer;

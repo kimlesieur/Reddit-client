@@ -1,24 +1,30 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
+import { RootState } from '../../app/store';
 
-export const loadComments = createAsyncThunk(
+type AsyncThunkConfig = {
+    state: RootState,
+    rejectValue: string | unknown,
+};
+
+export const loadComments = createAsyncThunk<any, Post, AsyncThunkConfig>(
     'comments/loadComments',
     async ({permalink}, thunkAPI) => {
         const res = await fetch(`https://www.reddit.com${permalink}.json`);
         const data = await res.json();
-        return data[1].data.children.map(comment => comment.data);
+        return data[1].data.children.map((comment: Comment) => comment.data);
     }
 );
 
-export const commentsSlice = createSlice({
-    name: 'comments',
-    initialState: {
+const initialState: CommentsState = {
         commentsList: {},
         isLoading: false, 
         error: false
-    },
-    reducers:{
+}
 
-    },
+export const commentsSlice = createSlice({
+    name: 'comments',
+    initialState,
+    reducers:{},
     extraReducers: builder => {
         builder
         .addCase(loadComments.pending, (state) => {
@@ -29,20 +35,11 @@ export const commentsSlice = createSlice({
             state.isLoading = false;
             state.error = false;
             state.commentsList = action.payload;
-            /*
-            const postId = action.meta.arg.postId;
-            state.commentsList[postId] = {};
-            action.payload.map(comment => {
-                const id = comment.id;
-                state.commentsList[postId][id] = {...comment}
-            });
-            */
-
         })
         .addCase(loadComments.rejected, (state) => {
             state.isLoading = false;
             state.error = false;
-            state.postsList = [];
+            state.commentsList = [];
         })
 
     }
@@ -52,6 +49,6 @@ export const commentsSlice = createSlice({
 
 export default commentsSlice.reducer;
 
-export const selectComments = state => state.comments.commentsList;
-export const isLoading = state => state.comments.isLoading;
-export const error = state => state.comments.error;
+export const selectComments = (state: RootState) => state.comments.commentsList;
+export const isLoading = (state: RootState) => state.comments.isLoading;
+export const error = (state: RootState) => state.comments.error;

@@ -1,23 +1,24 @@
-import './Comments.css';
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useAppSelector } from '../../app/hooks';
 import Comment from '../../components/Comment/Comment';
 import { selectComments } from './commentsSlice';
 
-import Stack from '@mui/material/Stack';
+import {Stack, Container} from '@mui/material';
 
 
-const Comments = ({postName, showingComments}) => {
-    const comments = useSelector(selectComments);
+const Comments = ({postName, showingComments}: {postName: string, showingComments: any}) => {
 
-    const filterCommentsById = (name) => {
-        const commentsList = Object.values(comments).filter(obj => obj.parent_id === name);
+    const comments: Comment[] = useAppSelector(selectComments);
+
+    const filterCommentsById = (name: string) => {
+        const commentsList = Object.values(comments).filter((obj: any) => obj.parent_id === name);
         return commentsList;
         
     };
 
     return (
-        <Stack container="true" sx={{backgroundColor: '#0788bf', maxHeight: 500, overflow: 'auto'}}>
+        <Stack>
+            <Container maxWidth="md">
             <span className="post-comments-container">
                 {showingComments && 
                 <div>
@@ -31,6 +32,7 @@ const Comments = ({postName, showingComments}) => {
                 </div>
                 }
             </span>
+            </Container>
         </Stack>
 
     );

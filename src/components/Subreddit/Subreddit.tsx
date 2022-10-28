@@ -1,19 +1,19 @@
 import './Subreddit.css';
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { setSubreddit, selectSubreddit } from '../../features/Posts/postsSlice';
 
 
-const Subreddit = ({subreddit}) => {
-    const dispatch= useDispatch();
-    const actualSubreddit = useSelector(selectSubreddit);
+const Subreddit = ({subreddit}: {subreddit: Subreddit}) => {
+    const dispatch= useAppDispatch();
+    const actualSubreddit = useAppSelector(selectSubreddit);
 
 return (
         <div className={`subreddit-container
                     ${actualSubreddit === subreddit.display_name_prefixed && `selected-subreddit`}
                     `}
 
-                    onClick={() => dispatch(setSubreddit(subreddit.display_name_prefixed), [actualSubreddit])}
+                    onClick={() => dispatch(setSubreddit(subreddit.display_name_prefixed))}
             >
              <div className="subreddit-card">
                     <img

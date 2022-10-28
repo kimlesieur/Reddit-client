@@ -1,4 +1,5 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
+import { AppDispatch, RootState } from '../../app/store';
 import { arrayFilter } from '../../utils/utils';
 
 type AsyncThunkConfig = {
@@ -6,7 +7,7 @@ type AsyncThunkConfig = {
     rejectValue: string | unknown,
 };
 
-export const loadPosts = createAsyncThunk<Post, void, AsyncThunkConfig>(
+export const loadPosts = createAsyncThunk<Post, string, AsyncThunkConfig>(
     'posts/loadPosts',
     async (subreddit) => {
         const res = await fetch(`https://www.reddit.com/${subreddit}.json`);
@@ -17,8 +18,8 @@ export const loadPosts = createAsyncThunk<Post, void, AsyncThunkConfig>(
     }
 );
 
-export const handleChangeValue = (value: string) => {
-    return (dispatch, getState) => {
+export const handleSearch = (value: string) => {
+    return (dispatch: AppDispatch, getState: () => RootState) => {
         const state = getState();
         dispatch(setSearchTerm(value));
         const postsList = state.posts.postsList;
@@ -30,16 +31,17 @@ export const handleChangeValue = (value: string) => {
     } 
 };
 
+const initialState: PostsState = {
+    postsList: {},
+    error: false,
+    isLoading: false, 
+    selectedSubreddit: 'r/home',
+    searchTerm: '',
+};
+
 export const postsSlice = createSlice({
     name: 'posts',
-    initialState: {
-        postsList: {},
-        error: false,
-        isLoading: false, 
-        selectedSubreddit: 'r/home',
-        searchTerm: '',
-    
-    },
+    initialState,
     reducers: {
         setSubreddit(state, action) {
             state.selectedSubreddit = action.payload;
@@ -76,9 +78,9 @@ export const postsSlice = createSlice({
 
 
 export const {setSubreddit, toggleShowingComments, setSearchTerm, setPostsList} = postsSlice.actions;
-export const selectPosts = (state) => state.posts.postsList;
-export const selectSubreddit = (state) => state.posts.selectedSubreddit;
-export const isLoading = state => state.posts.isLoading;
-export const isError = state => state.posts.error;
+export const selectPosts = (state: RootState) => state.posts.postsList;
+export const selectSubreddit = (state: RootState) => state.posts.selectedSubreddit;
+export const isLoading = (state: RootState) => state.posts.isLoading;
+export const isError = (state: RootState) => state.posts.error;
 
 export default postsSlice.reducer;
